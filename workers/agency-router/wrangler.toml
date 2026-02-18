@@ -1,0 +1,19 @@
+name = "agency-router"
+main = "src/index.ts"
+compatibility_date = "2025-02-18"
+compatibility_flags = ["nodejs_compat"]
+
+[build]
+command = "npm install && npm run build"
+cwd = "./."
+
+[env.production]
+name = "agency-router-prod"
+routes = [
+  { pattern = "router.overseerclaw.uk/*", zone_name = "overseerclaw.uk" }
+]
+vars = { ENVIRONMENT = "production" }
+
+[env.development]
+name = "agency-router-dev"
+vars = { ENVIRONMENT = "development" }
