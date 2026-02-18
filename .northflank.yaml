@@ -1,0 +1,62 @@
+# Northflank Deployment - OpenClaw Assistant (Personal Gateway)
+# Generated: 2026-02-18
+
+project:
+  name: openclaw-assistant
+  description: Personal AI Assistant Gateway - Native OpenClaw
+
+runtime:
+  image: node:22-slim
+  buildCommand: pnpm install && pnpm build
+  startCommand: pnpm openclaw gateway run --bind 0.0.0.0 --port 18789 --loglevel info
+
+  environment:
+    PORT: "18789"
+    NODE_ENV: production
+    LOGLEVEL: info
+    OPENCLAW_SESSIONS_DIR: /tmp/openclaw_sessions
+
+  resources:
+    memory: 512Mi
+    cpu: 250m
+
+  scaling:
+    minInstances: 1
+    maxInstances: 3
+    targetCpuUtilization: 70
+
+networking:
+  ports:
+    - name: gateway
+      port: 18789
+      protocol: HTTP
+      visibility: public
+
+  healthCheck:
+    path: /health
+    port: 18789
+    intervalSeconds: 30
+    timeoutSeconds: 5
+    successThreshold: 1
+    failureThreshold: 3
+
+storage:
+  sessions:
+    size: 1Gi
+    path: /tmp/openclaw_sessions
+
+environment:
+  ANTHROPIC_API_KEY:
+    type: secret
+    source: anthropic_api_key
+    required: true
+
+  GATEWAY_TOKEN:
+    type: secret
+    source: gateway_token
+    required: false
+
+  TELEGRAM_BOT_TOKEN:
+    type: secret
+    source: telegram_bot_token
+    required: false

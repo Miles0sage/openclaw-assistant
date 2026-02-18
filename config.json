@@ -1,0 +1,55 @@
+{
+  "name": "Personal Assistant",
+  "version": "2026.2.18",
+  "description": "Personal AI Assistant powered by OpenClaw",
+  "port": 18789,
+  "gateway": {
+    "mode": "ws",
+    "host": "0.0.0.0",
+    "port": 18789,
+    "token": "${GATEWAY_TOKEN}"
+  },
+  "channels": {
+    "telegram": {
+      "enabled": true,
+      "botToken": "${TELEGRAM_BOT_TOKEN}",
+      "name": "Personal Telegram Bot",
+      "type": "messaging",
+      "sessionKeyPrefix": "personal:telegram"
+    }
+  },
+  "agents": {
+    "assistant": {
+      "name": "Personal Assistant",
+      "emoji": "🤖",
+      "type": "assistant",
+      "model": "claude-opus-4-6",
+      "apiProvider": "anthropic",
+      "thinking": {
+        "type": "adaptive",
+        "defaultEffort": "medium"
+      },
+      "persona": "I'm your personal assistant. I help you with tasks, decisions, and information. I'm thoughtful, direct, and always here to help.",
+      "skills": [
+        "task_management",
+        "information_retrieval",
+        "decision_support",
+        "scheduling",
+        "prioritization",
+        "analysis"
+      ],
+      "apiKeyEnv": "ANTHROPIC_API_KEY"
+    }
+  },
+  "routing": {
+    "enabled": true,
+    "strategy": "complexity-based",
+    "defaultAgent": "assistant"
+  },
+  "features": {
+    "sessionMemory": true,
+    "persistSessions": true,
+    "messageLogging": true,
+    "costTracking": true
+  }
+}
