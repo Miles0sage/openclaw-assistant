@@ -1,0 +1,148 @@
+{
+  "agents": {
+    "codegen_kimi": {
+      "name": "CodeGen (Kimi 2.5)",
+      "emoji": "💻",
+      "type": "code_generation",
+      "model": "deepseek-coder-2.5",
+      "apiProvider": "deepseek",
+      "apiKeyEnv": "DEEPSEEK_API_KEY",
+      "thinking": {
+        "type": "extended",
+        "enabled": true
+      },
+      "persona": "I'm a code generation expert using Deepseek's Kimi 2.5. I excel at implementing features, debugging code, writing tests, and optimizing performance. I'm cost-effective and just as capable as Claude for development tasks.",
+      "skills": [
+        "code_implementation",
+        "debugging",
+        "testing",
+        "refactoring",
+        "optimization",
+        "framework_specific_work",
+        "library_integration"
+      ],
+      "keywords": [
+        "implement",
+        "code",
+        "function",
+        "class",
+        "method",
+        "debug",
+        "fix",
+        "error",
+        "test",
+        "unit test",
+        "integration test",
+        "refactor",
+        "optimize",
+        "performance",
+        "bug",
+        "deploy",
+        "build",
+        "script",
+        "automation",
+        "api",
+        "endpoint",
+        "route",
+        "middleware"
+      ],
+      "costPerMToken": 0.27,
+      "cacheReadCostPerMToken": 0.027,
+      "costPerOutputMToken": 1.1,
+      "maxTokens": 8000,
+      "inputTokenWindow": 64000,
+      "reasoning": {
+        "budgetTokens": 2000,
+        "outputTokenLimit": 6000
+      }
+    },
+    "security_kimi": {
+      "name": "Security (Kimi)",
+      "emoji": "🔒",
+      "type": "security_analysis",
+      "model": "deepseek-reasoner",
+      "apiProvider": "deepseek",
+      "apiKeyEnv": "DEEPSEEK_API_KEY",
+      "thinking": {
+        "type": "extended",
+        "enabled": true
+      },
+      "persona": "I'm a security expert using Deepseek's Kimi full model with extended reasoning. I perform threat modeling, vulnerability analysis, compliance auditing, and security architecture reviews. I use deep reasoning to catch subtle security issues.",
+      "skills": [
+        "threat_modeling",
+        "vulnerability_assessment",
+        "penetration_testing",
+        "compliance_auditing",
+        "secure_coding",
+        "cryptography",
+        "authentication",
+        "authorization",
+        "data_protection",
+        "incident_response",
+        "security_architecture",
+        "owasp_compliance"
+      ],
+      "keywords": [
+        "security",
+        "threat",
+        "vulnerability",
+        "exploit",
+        "attack",
+        "breach",
+        "risk",
+        "penetration",
+        "audit",
+        "compliance",
+        "encryption",
+        "authentication",
+        "authorization",
+        "permission",
+        "access control",
+        "sensitive data",
+        "privacy",
+        "secure",
+        "hardening",
+        "defense",
+        "owasp",
+        "cwe",
+        "cve"
+      ],
+      "costPerMToken": 0.55,
+      "cacheReadCostPerMToken": 0.055,
+      "costPerOutputMToken": 2.19,
+      "maxTokens": 16000,
+      "inputTokenWindow": 128000,
+      "reasoning": {
+        "budgetTokens": 10000,
+        "outputTokenLimit": 8000
+      }
+    }
+  },
+  "routing": {
+    "codegen": {
+      "primaryAgent": "codegen_kimi",
+      "fallback": "codegen_claude",
+      "costThreshold": 10,
+      "complexityRange": ["moderate", "high"]
+    },
+    "security": {
+      "primaryAgent": "security_kimi",
+      "fallback": "security_claude",
+      "costThreshold": 15,
+      "complexityRange": ["high", "critical"]
+    }
+  },
+  "costComparison": {
+    "codegen_kimi_2.5": {
+      "input": "$0.27/M tokens",
+      "output": "$1.10/M tokens",
+      "savings_vs_claude": "70-80%"
+    },
+    "security_kimi": {
+      "input": "$0.55/M tokens",
+      "output": "$2.19/M tokens",
+      "savings_vs_claude": "60-70%",
+      "advantage": "Extended reasoning for security analysis"
+    }
+  }
+}
